@@ -1,0 +1,156 @@
+swagger: "2.0"
+info:
+  description: This is a API Docs written by yaml. This is Docs for Renting System server
+  version: 1.0.0
+  title: Renting System Documentation
+  contact:
+    email: 17520279@gm.uit.edu.vn
+    name: Dương Lê Thanh Bình
+  host: "http://localhost:5000"
+paths:
+  "/api/users/register":
+    post:
+      tags:
+        - "User"
+      summary: "Create user"
+      description: "This can only be done by the logged in user."
+      produces:
+        - application/json
+      parameters:
+        - name: "name"
+          in: "formData"
+          description: "The user name for register"
+          required: true
+          type: "string"
+        - name: "email"
+          in: "formData"
+          description: "The user email for register"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "The user password for register"
+          required: true
+          type: "string"
+        - name: "lastname"
+          in: "formData"
+          description: "The user lastname for register"
+          required: true
+          type: "string"
+        - name: "role"
+          in: "formData"
+          description: "The user lastname for register"
+          required: true
+          type: "integer"
+        - name: "image"
+          in: "formData"
+          description: "The user image for register"
+          required: true
+          type: "string"
+      responses:
+        default:
+          description: "Successful"
+  "/api/users/login":
+    post:
+      tags:
+        - "User"
+      summary: "Logs user into the system"
+      description: ""
+      produces:
+        - "application/json"
+      parameters:
+        - name: "email"
+          in: "formData"
+          description: "The user name for login"
+          required: true
+          type: "string"
+        - name: "password"
+          in: "formData"
+          description: "The password for login in clear text"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+  "/api/users/auth":
+    get:
+      tags:
+        - "User"
+      summary: "after authenfication, get data back from server"
+      description: ""
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Get back unique data of user"
+  "/api/users/logout":
+    get:
+      tags:
+        - "User"
+      summary: "Logout from system"
+      description: ""
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Get json data: success: true"
+  "/api/product/uploadImage":
+    post:
+      tags:
+        - "Product"
+      summary: "Upload image to server"
+  "/api/product/uploadProduct":
+    post:
+      tags:
+        - "Product"
+      summary: "Upload new prodcut to system"
+      description: "Provide some information like: title, description, price, images, devices, sold, views"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "title"
+          in: "formData"
+          description: "The title of new product"
+          required: true
+          type: "string"
+        - name: "description"
+          in: "formData"
+          description: "The description of new product"
+          required: true
+          type: "string"
+        - name: "price"
+          in: "formData"
+          description: "The price of new product"
+          required: true
+          type: "integer"
+        - name: "images"
+          in: "formData"
+          description: "The images of new product"
+          required: true
+          type: "string"
+        - name: "devices"
+          in: "formData"
+          description: "The devices of new product"
+          required: true
+          type: "integer"
+        - name: "sold"
+          in: "formData"
+          description: "The sold of new product"
+          required: true
+          type: "integer"
+        - name: "views"
+          in: "formData"
+          description: "The views of new product"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Json file: {success: true}"
+  "/api/product/getProducts":
+    post:
+      tags:
+        - "Product"
+      summary: "Get all product from the database"
+      responses:
+        "200":
+          description: "Get json data of product data"

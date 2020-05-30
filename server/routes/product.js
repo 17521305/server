@@ -23,17 +23,17 @@ var upload=multer({storage:storage}).single("file")
 //             Product
 //=================================
 
-router.post("/uploadImage", auth, (req, res) => {
-    upload(req,res,err=>{
-        if(err) return res.json({success:false,err})
-        return res.json({success:true,image:res.req.file.path,fileName:res.req.file.filename})
+router.post("/uploadImage", (req, res) => {
+    upload(req, res, err => {
+        if (err) return res.json({ success: false, err })
+        return res.json({ success: true, image: res.req.file.path, fileName: res.req.file.filename })
     })
 });
-router.post("/uploadProduct", auth, (req, res) => {
-    const product=new Product(req.body)
-    product.save((err)=>{
-        if(err) returnres.status(400).json({success:false,err})
-        return res.status(200).json({success:true})
+router.post("/uploadProduct", (req, res) => {
+    const product = new Product(req.body)
+    product.save((err) => {
+        if (err) returnres.status(400).json({ success: false, err })
+        return res.status(200).json({ success: true })
     })
 });
 router.post("/getProducts", (req, res) => {

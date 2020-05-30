@@ -6,6 +6,16 @@ const cors = require('cors')
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
+// Api docs
+const YAML = require('yamljs');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = YAML.load('./docs/docs.yaml');
+const options = {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: "Renting",
+  customfavIcon: "/docs/rent.png"
+};
+app.use('/docs', express.static('docs'));
 const config = require("./config/key");
 
 // const mongoose = require("mongoose");
@@ -30,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/product', require('./routes/product'));
 
